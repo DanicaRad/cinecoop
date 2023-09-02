@@ -1,0 +1,156 @@
+TODOS: 
+1. Fix addMovie to UserMovies model to use sqlForPartialUpdate
+2. Uniform variable names 
+3. Error handling
+4. Middleware
+5. Adding movies to db on bullk call - api/movies/endpoint
+
+
+** Getting movie data from API with movieIds from lists **
+promise.all() ?
+
+1. should sorting & filtering be done on backend or front end?
+- if data is complete, canm do on frontend, but if not, will need to make another request to backend 
+2. ** The API I'm using has features to create user, user can create lists, watchlist... basically all the features im creating. Should I try to use that? **
+** If not, I want to store movie imageUrl, reviews in  my db to discplay in user's lists. I would add that data to my movie table by fetching data to ext API anytime user clicks to add to list. ** 
+
+2. API routes that make calls to ext API use common settings and headers- where can I put a file with those common settings?
+3. Should creating, adding to and editing lists be defined within User model?
+4. Should I check that a db entry exists before trying to update it?
+
+
+HANDLING ERRORS:
+Throw specific error in db
+- in Route handler, I can do what I want
+- Common strategy in auth: take whatever error comes back and throws unauthorized error "login credentials incorrect"
+
+4. Creating a "watched list" for each member - table of username + movie_id, (stretch goal - date watched, review)
+
+Code organization:
+1. my frontend uses an API class with all methods to make calls to backend
+2. make calls to backend
+3. backend calls external API or db model methods
+- I will prob make a backend "movies" model to pass returned json data to format for response to frontend? is that too much?
+
+
+movie_id integer REFERENCES users_movies (username, movie_id) ON DELETE CASCADE,
+
+Miscnotes:
+- average rating = 10 point rating system
+- when user rates movie, add it to "watch" list
+- lists should have "created on" dates
+- users should have "member since" and "last login"
+stretch goals:
+- activity stream
+- "diary" feature - log details about a movie, including when you saw it, defaults to date you marked as watched or reviewed if not view date provided
+- 
+
+
+movies/
+  - popular
+  - now playing
+  - top rated
+  - upcoming
+
+movie/
+  - index = movie detail
+  - 
+
+
+{
+  "images": {
+    "base_url": "http://image.tmdb.org/t/p/",
+    "secure_base_url": "https://image.tmdb.org/t/p/",
+    "backdrop_sizes": [
+      "w300",
+      "w780",
+      "w1280",
+      "original"
+    ],
+    "logo_sizes": [
+      "w45",
+      "w92",
+      "w154",
+      "w185",
+      "w300",
+      "w500",
+      "original"
+    ],
+    "poster_sizes": [
+      "w92",
+      "w154",
+      "w185",
+      "w342",
+      "w500",
+      "w780",
+      "original"
+    ],
+    "profile_sizes": [
+      "w45",
+      "w185",
+      "h632",
+      "original"
+    ],
+    "still_sizes": [
+      "w92",
+      "w185",
+      "w300",
+      "original"
+    ]
+  },
+  "change_keys": [
+    "adult",
+    "air_date",
+    "also_known_as",
+    "alternative_titles",
+    "biography",
+    "birthday",
+    "budget",
+    "cast",
+    "certifications",
+    "character_names",
+    "created_by",
+    "crew",
+    "deathday",
+    "episode",
+    "episode_number",
+    "episode_run_time",
+    "freebase_id",
+    "freebase_mid",
+    "general",
+    "genres",
+    "guest_stars",
+    "homepage",
+    "images",
+    "imdb_id",
+    "languages",
+    "name",
+    "network",
+    "origin_country",
+    "original_name",
+    "original_title",
+    "overview",
+    "parts",
+    "place_of_birth",
+    "plot_keywords",
+    "production_code",
+    "production_companies",
+    "production_countries",
+    "releases",
+    "revenue",
+    "runtime",
+    "season",
+    "season_number",
+    "season_regular",
+    "spoken_languages",
+    "status",
+    "tagline",
+    "title",
+    "translations",
+    "tvdb_id",
+    "tvrage_id",
+    "type",
+    "video",
+    "videos"
+  ]
+}

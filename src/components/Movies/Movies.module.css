@@ -1,0 +1,46 @@
+.movieMenu {
+	position: absolute;
+	bottom: 3%;
+	left: 15%;
+	right: 15%;
+	background-color: hsl(0, 0%, 13%, .85);
+	width: fit-content;
+	text-align: center;
+	justify-self: center;
+	margin: auto;
+	z-index: 0;
+}
+
+.movieMenu > a {
+	color: #ffffff;
+	padding: .3em;
+}
+
+.movieMenu > a:hover {
+	color: #d0d0d0;
+}
+
+.watched {
+	color: #48eb12;
+	padding: .3em;
+}
+
+.watched:hover {
+	color: #7ff159;
+}
+
+.watchlist {
+	color: #00a7fa;
+}
+
+.watchlist:hover {
+	color: #33b9fb;
+}
+
+.favorite {
+	color: #ff3b28;
+}
+
+.favorite:hover {
+	color: #ff6253;
+}
