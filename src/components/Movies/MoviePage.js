@@ -47,7 +47,7 @@ export default function MovieDetail ({ movie, posterUrl, backdropUrl, director }
 										</div>
 									</div>
 									<div className='col-auto'>
-										<MovieMenu id={movie.id} />
+										<MovieMenu id={movie.id} title={ movie.title} component={'moviePage'} />
 									</div>
 								</div>
 							</div>

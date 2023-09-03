@@ -1,20 +1,23 @@
 import List from '@/models/List';
 
 export default async function handler (req, res) {
-  const { username, id } = req.query;
-  if (req.method === 'GET') return getHandler(id, username, req, res);
+	const { username, id } = req.query;
+	if (req.method === 'GET') return getHandler(id, username, req, res);
 	if (req.method === 'POST') return postHandler(id, req, res);
-  if (req.method === 'PATCH') return patchHandler(id, req, res);
-  if (req.method === 'PUT') return putHandler(id, req, res);
+	if (req.method === 'PATCH') return patchHandler(id, req, res);
+	if (req.method === 'PUT') return putHandler(id, req, res);
 	if (req.method === 'DELETE') return deleteHandler(id, req, res);
 	else return res.status(400).send({ message: 'forbidden method' });
 }
 
-async function getHandler(id, username, req, res) {
+async function getHandler (id, username, req, res) {
 	// works!
-  try {
-    console.log("id, username", id, username);
+	try {
+		console.log('id, username', id, username);
 		const data = await List.getListWithMovies(+id, username);
+		if (data.isPrivate && (!session || session.username !== username)) {
+			return res.status(403).send({ messasge: 'unauthorized' });
+		}
 		return res.send({ data });
 	} catch (err) {
 		console.error('API Error:', err);
@@ -22,7 +25,7 @@ async function getHandler(id, username, req, res) {
 	}
 }
 
-async function postHandler(id, req, res) {
+async function postHandler (id, req, res) {
 	// works!
 	try {
 		const { movieId } = req.body;
@@ -34,7 +37,7 @@ async function postHandler(id, req, res) {
 	}
 }
 
-async function patchHandler(id, req, res) {
+async function patchHandler (id, req, res) {
 	// works!
 	try {
 		const result = await List.updateList(id, req.body);
@@ -45,16 +48,17 @@ async function patchHandler(id, req, res) {
 	}
 }
 
-async function putHandler(id, req, res) {
+async function putHandler (id, req, res) {
 	// works!
-  try {
+	try {
 		const { movieId, action } = req.body;
-		const response = action === "remove" ? await List.removeFromList(id, movieId) : await List.addToList(id, movieId);
-    return res.send({ response });
-  } catch (err) {
-    console.error("API Error: ", err);
-    return res.status(500).send({ Error: err.message });
-  }
+		const response =
+			action === 'remove' ? await List.removeFromList(id, movieId) : await List.addToList(id, movieId);
+		return res.send({ response });
+	} catch (err) {
+		console.error('API Error: ', err);
+		return res.status(500).send({ Error: err.message });
+	}
 }
 
 async function deleteHandler (id, req, res) {

@@ -8,15 +8,15 @@ import styles from './Buttons.module.css';
 import UserContext from '../Auth/UserContext';
 import MoreOptions from './MoreOptions';
 
-export default function MovieButtons({ id, pageName }) {
+export default function MovieButtons({ id, component }) {
 	const { data: session } = useSession();
-	const { userMovies, currUser, setUserMovies } = useContext(UserContext);
+	const { userMovies, setUserMovies } = useContext(UserContext);
 	const [ userMovie, setUserMovie ] = useState({});
 	const [ isFavorite, setIsFavorite ] = useState();
 	const [ isWatched, setIsWatched ] = useState();
 	const [ onWatchlist, setOnWatchlist ] = useState();
 	const [isClicked, setIsClicked] = useState();
-	const [stylesClass, setStylesClass] = useState(pageName === 'movieCard' ? styles.movieCard : styles.moviePage);
+	const [stylesClass, setStylesClass] = useState(component === 'movieCard' ? styles.movieCard : styles.moviePage);
 
 	useEffect(
 		() => {

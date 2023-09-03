@@ -16,7 +16,14 @@
 }
 
 .moviePage {
-	text-align: center;
+	display: inline-flex;
+	width: 100%;
+	justify-content: space-evenly;
+	background-color: #2b3035;
+}
+
+.moviePage > a {
+	font-size: 2rem;
 }
 
 .false {

@@ -18,7 +18,7 @@ export default function Lists () {
 			console.log("session", session);
 			setUsername(username);
 			async function getLists () {
-				const results = await CinecoopApi.getPublicLists(username);
+				const results = await CinecoopApi.getLists(username);
 				setLists(results.data);
 			}
 			getLists();

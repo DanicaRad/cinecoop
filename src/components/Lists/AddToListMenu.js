@@ -46,19 +46,15 @@ export default function MovieMenu ({ id, title }) {
 				<Modal.Body>
 					<Form className='d-grid'>
 							<input type='checkbox' className='btn-check' id='btn-check-4' autocomplete='off' />
-							<label className='btn' for='btn-check-4'>
-								Single toggle <i className='bi bi-lock-fill' />
-							</label>
+            <label className='btn' for='btn-check-4'>
+                Single toggle <i className='bi bi-lock-fill' />
+              </label>
 						{userLists.map((l) => (
-							<div key={l.id}>
-								{/* <input className='form-check-input' type='checkbox' value='' id={l.id} />
+							<div className='form-check text-end' key={l.id}>
+								<input className='form-check-input' type='checkbox' value='' id={l.id} />
 								<label className='form-check-label' htmlFor={l.id}>
 									{l.isPrivate && <i className='bi bi-lock-fill' />} {l.name}
-								</label> */}
-                <input type='checkbox' className='btn-check' id={l.id} autocomplete='off' />
-							<label className='btn' htmlFor={l.id}>
-								{l.isPrivate && <i className='bi bi-lock-fill' />} {l.name}
-							</label>
+								</label>
 							</div>
 						))}
 					</Form>

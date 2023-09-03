@@ -7,23 +7,6 @@ export default class List {
    * returns { id, username, name, isPrivate }
    */
 
-	// static async getList (id) {
-	// 	try {
-	// 		const result = await db.query(
-	// 			`SELECT
-	// 				id, name, username, description, is_private AS "isPrivate", created_at AS "createdAt"
-	//       FROM lists
-	//       WHERE id = $1`,
-	// 			[ id ]
-	// 		);
-	// 		const list = result.rows[0];
-	// 		// if(!list) return {error: "list not found"}
-	// 		return list;
-	// 	} catch (err) {
-	// 		return { err };
-	// 	}
-	// }
-
 	static async getList (id) {
 		try {
 			const result = await db.query(
@@ -108,6 +91,7 @@ export default class List {
 					m.id AS "id",
 					m.poster_path AS "posterPath",
 					m.vote_average AS "voteAverage",
+					l.is_private AS "isPrivate",
 					COUNT(ll.list_id) AS "likes"
 				FROM movies_lists AS ml
 				JOIN movies AS m
@@ -140,12 +124,16 @@ export default class List {
 					m.title AS "title",
 					m.id AS "id",
 					m.poster_path AS "posterPath",
-					m.vote_average AS "voteAverage"
+					m.vote_average AS "voteAverage",
+					l.is_private AS "isPrivate",
+					COUNT(ll.list_id) AS "likes"
 				FROM movies_lists AS ml
 				JOIN movies AS m
 					ON ml.movie_id = m.id
 				RIGHT JOIN lists AS l
 					ON ml.list_id = l.id
+				LEFT JOIN lists_likes AS ll
+					ON ml.list_id = ll.list_id
 				WHERE l.username = $1
 				GROUP BY l.id, m.id, m.title`,
 			[ username ]
@@ -162,6 +150,7 @@ export default class List {
 				lists[l.listId] = {
 					id: l.listId,
 					name: l.listName,
+					isPrivate: l.isPrivate,
 					description: l.description,
 					username: l.username,
 					likes: +l.likes,

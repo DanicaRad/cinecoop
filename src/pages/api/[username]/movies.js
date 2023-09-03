@@ -8,7 +8,7 @@ export default async function handler (req, res) {
 	const { username } = req.query;
 	const session = await getServerSession(req, res, authOptions);
 	if (!session || username !== session.username) {
-		return res.status(400).sesnd({ message: 'unauthorized' });
+		return res.status(403).send({ message: 'unauthorized' });
 	}
 	console.log('session in [username]/movies', session);
 	if (req.method === 'GET') return getHandler(username, req, res);

@@ -265,4 +265,23 @@ export default class User {
 			return err;
 		}
 	}
+
+		/** getAllLists: get all user's lists without movie data
+	 *  returns { listId, name, username, description, created_at }
+	 */
+
+	static async getAllLists (username) {
+		const result = await db.query(
+			`SELECT 
+				l.id, l.name, l.description, l.is_private AS "isPrivate", l.created_at AS "createdAt", COUNT(ml.list_id) AS "movieCount"
+			FROM lists
+			JOIN movies_lists AS ml
+			ON lists.id = ml.list_id
+			GROUP BY l.id, ml.list_id
+			ORDER BY l.created_at
+			WHERE username = $1`,
+			[ username ]
+		);
+		return result.rows;
+	}
 }
