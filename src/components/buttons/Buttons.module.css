@@ -1,4 +1,4 @@
-.movieMenu {
+.movieCard {
 	position: absolute;
 	bottom: 3%;
 	left: 15%;
@@ -11,8 +11,12 @@
 	z-index: 0;
 }
 
-.movieMenu > a {
+.movieCard > a, .moviePage > a {
 	padding: .3em;
+}
+
+.moviePage {
+	text-align: center;
 }
 
 .false {

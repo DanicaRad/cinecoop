@@ -3,7 +3,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import LoggedInDropDown from './LoggedInDropDown';
 import styles from './Navigation.module.css';
 
-export default function Navigation () {
+export default function Navigation() {
 	function signInSignOutBtn () {
 		const { data: session } = useSession();
 		console.log('session', session);

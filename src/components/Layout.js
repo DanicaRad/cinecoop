@@ -7,14 +7,12 @@ import CinecoopApi from '@/Api';
 
 export default function Layout ({ children }) {
 	const { data: session } = useSession();
-	const [ currUser, setCurrUser ] = useState(null);
-	const [ userMovies, setUserMovies ] = useState(null);
+	const [userMovies, setUserMovies] = useState(null);
 
 	useEffect(
 		() => {
-			async function getCurrUser () {
+			async function getCurrUser() {
 				if (session) {
-					setCurrUser(session.username);
 					const data = await CinecoopApi.getUserMovies(session.username);
 					console.log('user watchlist data in layout useEffect', data);
 					setUserMovies(data);
@@ -27,7 +25,7 @@ export default function Layout ({ children }) {
 
 	return (
 		<div>
-			<UserContext.Provider value={{ currUser, setCurrUser, userMovies, setUserMovies }}>
+			<UserContext.Provider value={{ userMovies, setUserMovies }}>
 				<Navigation />
 				<Container className='mt-4'>
 					<main>{children}</main>

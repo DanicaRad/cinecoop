@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import CinecoopApi from '@/Api';
+import React, { useEffect, useState } from 'react';
 import styles from './Buttons.module.css';
-import UserContext from '../Auth/UserContext';
 
 export default function WatchedButton({ watched }) {
 const [className, setClassName] = useState();

@@ -10,7 +10,20 @@ export default async function handler (req, res) {
 	else return res.status(400).send({ message: 'forbidden method' });
 }
 
-async function postHandler (id, req, res) {
+async function getHandler(id, username, req, res) {
+	// works!
+  try {
+    console.log("id, username", id, username);
+		const data = await List.getListWithMovies(+id, username);
+		return res.send({ data });
+	} catch (err) {
+		console.error('API Error:', err);
+		return res.status(500).send({ err });
+	}
+}
+
+async function postHandler(id, req, res) {
+	// works!
 	try {
 		const { movieId } = req.body;
 		const result = await List.addToList(id, movieId);
@@ -21,7 +34,8 @@ async function postHandler (id, req, res) {
 	}
 }
 
-async function patchHandler (id, req, res) {
+async function patchHandler(id, req, res) {
+	// works!
 	try {
 		const result = await List.updateList(id, req.body);
 		return res.send({ result });
@@ -32,9 +46,10 @@ async function patchHandler (id, req, res) {
 }
 
 async function putHandler(id, req, res) {
+	// works!
   try {
-    const { movieId } = req.body;
-    const response = await List.removeFromList(id, movieId);
+		const { movieId, action } = req.body;
+		const response = action === "remove" ? await List.removeFromList(id, movieId) : await List.addToList(id, movieId);
     return res.send({ response });
   } catch (err) {
     console.error("API Error: ", err);
@@ -46,17 +61,6 @@ async function deleteHandler (id, req, res) {
 	try {
 		const response = await List.deleteList(id);
 		return res.send({ response });
-	} catch (err) {
-		console.error('API Error:', err);
-		return res.status(500).send({ err });
-	}
-}
-
-async function getHandler (id, username, req, res) {
-  try {
-    console.log("id, username", id, username);
-		const data = await List.getListWithMovies(+id, username);
-		return res.send({ data });
 	} catch (err) {
 		console.error('API Error:', err);
 		return res.status(500).send({ err });

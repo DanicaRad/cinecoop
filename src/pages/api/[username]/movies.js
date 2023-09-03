@@ -1,9 +1,16 @@
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 import UserMovie from '@/models/UserMovie';
 import Watchlist from '@/models/Watchlist';
 import User from '@/models/User';
 
 export default async function handler (req, res) {
 	const { username } = req.query;
+	const session = await getServerSession(req, res, authOptions);
+	if (!session || username !== session.username) {
+		return res.status(400).sesnd({ message: 'unauthorized' });
+	}
+	console.log('session in [username]/movies', session);
 	if (req.method === 'GET') return getHandler(username, req, res);
 	if (req.method === 'POST') return postHandler(username, req, res);
 	if (req.method === 'PATCH') return patchHandler(username, req, res);
@@ -36,7 +43,7 @@ async function postHandler (username, req, res) {
 
 async function patchHandler (username, req, res) {
 	try {
-		console.log("patchHandler");
+		console.log('patchHandler');
 		const { movieId } = req.body;
 		console.log('req.body', req.body);
 		delete req.body.movieId;
