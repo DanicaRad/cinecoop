@@ -18,7 +18,8 @@ export default function Lists () {
 			console.log("session", session);
 			setUsername(username);
 			async function getLists () {
-				const results = await CinecoopApi.getLists(username);
+				const results = await CinecoopApi.getUsersLists(username);
+				console.log("list results in lists page", results);
 				setLists(results.data);
 			}
 			getLists();
@@ -29,12 +30,17 @@ export default function Lists () {
 	if (!lists) return <div>loading</div>;
 
 	return (
-		<div className='row row-cols-auto'>
-			{lists.map((l) => (
-				<div className='col' key={l.id}>
-					<ListCard key={l.id} list={l} />
-				</div>
-			))}
-		</div>
-	);
+    <div className='container w-75'>
+      <div className='display-6 pt-5 pb-4'>
+        {session && session.username === username ? 'Your lists' : `${username}'s lists`}
+      </div>
+      <div className='row row-cols-4'>
+        {lists.map((l) => (
+          <div className='col' key={l.id}>
+            <ListCard key={l.id} list={l} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

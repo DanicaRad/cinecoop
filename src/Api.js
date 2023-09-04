@@ -1,3 +1,4 @@
+
 export default class CinecoopApi {
 	static async request (endpoint, method = 'GET', data = null) {
 		const url = `/api/${endpoint}`;
@@ -9,7 +10,6 @@ export default class CinecoopApi {
 		};
 		if (data) params.body = JSON.stringify(data);
 		try {
-			console.log("url and params in Api", url, params);
 			return await fetch(url, params);
 		} catch (err) {
 			console.error('API Error', err);
@@ -35,6 +35,29 @@ export default class CinecoopApi {
 
 	static async getUsersLists (username) {
 		const res = await this.request(`${username}/lists`, 'get');
+		return await res.json();
+	}
+
+	/**
+	 * getUsersListsOnInitialLoad: returns all lists for user and formats movies as object for faster indexing in components
+	 * 
+	 * returns {id, name, isPrivate, description, movies: {id: true...}}
+	 */
+
+	static async getUsersListsOnInitialLoad(username) {
+		const res = await CinecoopApi.getUsersLists(username);
+		const lists = res.data.map(l => {
+			let movieObj = {}
+				l.movies.map(m => {
+				movieObj[m.id] = true
+				})
+			return {...l, movies: movieObj}
+		});
+		return lists;
+	}
+
+	static async getAllLists() {
+		const res = await this.request(`lists`, 'get');
 		return await res.json();
 	}
 
@@ -80,7 +103,6 @@ export default class CinecoopApi {
 
 	static async getUserMovies (username) {
 		const movies = await CinecoopApi.getWatchlist(username);
-		console.log('users movies in Cinecoop API', movies);
 		const usersMovies = {};
 		for (let m of movies.data) {
 			usersMovies[m.movieId] = {};
@@ -103,8 +125,8 @@ export default class CinecoopApi {
 	}
 
 	static async getMovies (endpoint) {
-		return await this.request(`movies/${endpoint}`, 'get');
-		// return await res.json();
+		const res = await this.request(`movies/${endpoint}`, 'get');
+		return await res.json();
 	}
 
 	static async searchMovies (query) {

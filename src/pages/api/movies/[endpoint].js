@@ -14,7 +14,7 @@ async function getHandler (req, res) {
   try {
     const { endpoint } = req.query;
 		const data = await TmdbApi.getMoviesby(`movie/${endpoint}`);
-		return res.send({ data });
+		return res.send({ data: data.results });
 	} catch (err) {
 		console.error('API Error:', err);
 		return res.status(500).send({ err });

@@ -4,6 +4,7 @@ import { authOptions } from '../../auth/[...nextauth]';
 
 export default async function handler (req, res) {
 	const { username } = req.query;
+	console.log("authOptions", authOptions);
 	const session = await getServerSession(req, res, authOptions);
 	try {
 		if (req.method === 'GET') return getHandler();

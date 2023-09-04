@@ -1,16 +1,31 @@
 import React, { useContext, useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import { Modal, Form, FormCheck } from 'react-bootstrap';
+import { Modal, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
 import UserContext from '../Auth/UserContext';
 import MovieButtons from '../buttons/MovieButtons';
+import styles from './Movies.module.css';
+import CinecoopApi from '@/Api';
 
 export default function MovieMenu ({ id, title }) {
 	const { data: session } = useSession();
 	const { userMovies, setUserMovies, userLists, setUserLists } = useContext(UserContext);
+	const [ dataToUpdate, setDataToUpdate ] = useState();
 	const [ show, setShow ] = useState(false);
+	const [ resolvedP, setResolvedP ] = useState([]);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+
+  function handleChange(evt) {
+    setDataToUpdate({listId: evt.target.id, movieId: id, action: "add"})
+	}
+
+	async function handleSubmit (evt) {
+    evt.preventDefault();
+    const res = await CinecoopApi.addToList(session.username, dataToUpdate.listId, { movieId: id, action: "add" });
+    console.log("res.data", res.data);
+    
+	}
 
 	// --bs-tertiary-bg
 
@@ -29,14 +44,22 @@ export default function MovieMenu ({ id, title }) {
 	if (!userLists) return <div>Loading</div>;
 
 	return (
-		<div className='list-group'>
-			<button type='button' className='list-group-item list-group-item-action text-center' onClick={signIn}>
+		<ListGroup className={styles.movieMenu}>
+			<button type='button' className='list-group-item list-group-item-action text-center text-bg-dark'>
 				<MovieButtons id={id} component={'moviePage'} />
 			</button>
-			<button type='button' className='list-group-item list-group-item-action text-center' onClick={signIn}>
+			<button
+				type='button'
+				className='list-group-item list-group-item-action text-center text-bg-dark'
+				onClick={signIn}
+			>
 				Sign Up
 			</button>
-			<button type='button' className='list-group-item list-group-item-action text-center' onClick={handleShow}>
+			<button
+				type='button'
+				className='list-group-item list-group-item-action text-center text-bg-dark'
+				onClick={handleShow}
+			>
 				Add To List
 			</button>
 			<Modal show={show} onHide={handleClose} centered>
@@ -44,31 +67,35 @@ export default function MovieMenu ({ id, title }) {
 					<Modal.Title>Add '{title}' to lists</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form className='d-grid'>
-							<input type='checkbox' className='btn-check' id='btn-check-4' autocomplete='off' />
-							<label className='btn' for='btn-check-4'>
-								Single toggle <i className='bi bi-lock-fill' />
-							</label>
+					<Form onSubmit={handleSubmit} className='d-grid gap-1'>
+						<input type='checkbox' className='btn-check' id='btn-check-4' autoComplete='off' />
+						<label className='btn' htmlFor='btn-check-4'>
+							Single toggle <i className='bi bi-lock-fill' />
+						</label>
 						{userLists.map((l) => (
-							<div key={l.id}>
-								{/* <input className='form-check-input' type='checkbox' value='' id={l.id} />
-								<label className='form-check-label' htmlFor={l.id}>
-									{l.isPrivate && <i className='bi bi-lock-fill' />} {l.name}
-								</label> */}
-                <input type='checkbox' className='btn-check' id={l.id} autocomplete='off' />
-							<label className='btn' htmlFor={l.id}>
-								{l.isPrivate && <i className='bi bi-lock-fill' />} {l.name}
-							</label>
+							<div key={l.id} className='d-grid'>
+								<input
+									type='checkbox'
+									className='btn-check'
+									id={l.id}
+									autoComplete='off'
+									onChange={handleChange}
+									checked={l.movies[id]}
+									disabled={l.movies[id]}
+								/>
+								<label className='btn' htmlFor={l.id}>
+									{l.name} {l.isPrivate && <i className='bi bi-lock-fill' />}
+								</label>
 							</div>
 						))}
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
-					<button className='btn' onClick={handleClose}>
+					<button className='btn btn-success btn-sm' onClick={handleClose}>
 						Add
 					</button>
 				</Modal.Footer>
 			</Modal>
-		</div>
+		</ListGroup>
 	);
 }

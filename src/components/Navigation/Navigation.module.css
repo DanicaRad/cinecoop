@@ -1,3 +1,9 @@
-.link {
+.link, .nav-link {
 	text-transform: uppercase;
+	font-weight: lighter;
+}
+
+a.link, div.link, .nav-item {
+	text-transform: uppercase;
+	font-weight: lighter;
 }

@@ -1,10 +1,5 @@
 TODOS: 
-1. Fix addMovie to UserMovies model to use sqlForPartialUpdate
-2. Uniform variable names 
-3. Error handling
-4. Middleware
-5. Adding movies to db on bullk call - api/movies/endpoint
-
+1. FIX FLEX DISPLAY FOR MOVIES GROUP TO COLS
 
 ** Getting movie data from API with movieIds from lists **
 promise.all() ?

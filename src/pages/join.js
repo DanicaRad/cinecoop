@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import CinecoopApi from '@/Api';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 // fastX: 385687, john wick: 603692,
 
-export default function Page () {
+export default function Page() {
+	const router = useRouter();
+	const { data: session } = useSession();
+
+	if (session) {
+		router.push('/');
+	}
+
 	const [ form, updateForm ] = useState({
 		username: '',
 		firstName: '',
@@ -24,8 +33,8 @@ export default function Page () {
 	// make API call to register user
 	async function handleSubmit (evt) {
 		evt.preventDefault();
-		const result = await CinecoopApi.register(form);
-		console.log('result', result);
+		const res = await CinecoopApi.register(form);
+		router.push({pathname: '/auth/signin', query: {newUser: res.data.username}})
 	}
 
 	async function createList (evt) {
@@ -52,7 +61,8 @@ export default function Page () {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
+			<div className='fw-lighter lead text-uppercase border-bottom border-2'>JOIN CINECOOP</div>
+			<form onSubmit={handleSubmit} className='mt-3'>
 				<div>
 					<label htmlFor='username' className='form-label'>
 						Username
@@ -87,10 +97,8 @@ export default function Page () {
 					<label htmlFor='password'>Password</label>
 					<input type='password' id='password' name='password' onChange={handleChange} className='form-control' required />
 				</div>
-				<button>Sign Up</button>
+				<button className='btn btn-light btn-sm mt-3'>SIGN UP</button>
 			</form>
-			<button onClick={createList}>Make List</button>
-			<button onClick={addToList}>Add to List</button>
 		</div>
 	);
 }

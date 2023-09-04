@@ -1,9 +1,20 @@
 import List from '@/models/List';
 
 export default async function handler(req, res) {
+  if (req.method === 'GET') return getHandler(req, res);
   if (req.method === 'POST') return postHandler(req, res);
   if (req.method === 'PATCH') return patchHandler(req, res);
-  else res.send({ message: "this is a get method" });
+  else res.status(400).send({ message: "forbidden method" });
+}
+
+async function getHandler(req, res) {
+  try {
+    const data = await List.getAllLists();
+    return res.send({data})
+  } catch (err) {
+    console.log("Api err:", err);
+    return res.status(500).send({err})
+  }
 }
 
 async function postHandler(req, res) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import MovieButtons from '../buttons/MovieButtons';
 import MovieMenu from './MovieMenu';
 import MovieCast from './MovieCast';
 
@@ -12,14 +11,13 @@ export default function MovieDetail ({ movie, posterUrl, backdropUrl, director }
 			<div className='card-body'>
 				<div className='card mb-3 border-0 bg-transparent'>
 					<div className='row g-0'>
-						<div className='col-sm-3'>
+						<div className='col-sm-3 col-auto'>
 							<img src={posterUrl} className='img-fluid' alt='...' />
-							<MovieButtons id={movie.id} />
 						</div>
 						<div className='col-sm-auto col-md-9'>
 							<div className='card-body'>
 								<div className='row g-0 justify-content-between'>
-									<div className='col-sm-8 me-auto'>
+									<div className='col-sm-8 col-auto me-auto'>
 										<div className='card-title'>
 											<span className='h4'>{movie.title}</span>{' '}
 											<small>

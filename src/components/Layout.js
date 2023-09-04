@@ -1,5 +1,5 @@
 import Navigation from './Navigation/Navigation';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import UserContext from './Auth/UserContext';
 import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
@@ -9,23 +9,26 @@ export default function Layout ({ children }) {
 	const { data: session } = useSession();
 	const [userMovies, setUserMovies] = useState(null);
 	const [userLists, setUserLists] = useState(null);
+	const [isLoading, setIsloading] = useState(true);
 
 	useEffect(
 		() => {
 			async function getCurrUser() {
 				if (session) {
+					console.log("getCurrUser in layout useEffect")
 					const movies = await CinecoopApi.getUserMovies(session.username);
-					console.log('user watchlist data in layout useEffect', movies);
-					const lists = await CinecoopApi.getUsersLists(session.username);
-					console.log("users lists", lists.data);
+					const lists = await CinecoopApi.getUsersListsOnInitialLoad(session.username);
 					setUserMovies(movies);
-					setUserLists(lists.data);
+					setUserLists(lists);
 				}
 			}
 			getCurrUser();
+			setIsloading(false);
 		},
 		[ session ]
 	);
+
+	if(isLoading) return <div>loading</div>
 
 	return (
 		<div>

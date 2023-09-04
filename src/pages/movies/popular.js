@@ -17,27 +17,27 @@ export default function Page () {
 	async function getMoviesFromApi () {
 		setIsLoading(true);
 		const res = await CinecoopApi.getMovies('popular');
-    const data = await res.json();
-    console.log("data", data.data.results);
-		setMovies(data.data.results);
+    console.log("data", res.data);
+		setMovies(res.data);
 		setIsLoading(false);
 	}
 
 	if (!movies) return <div>Loading</div>;
 
 	return (
-		<div className='d-flex flex-row flex-wrap'>
-			{
-      movies.map(m => (
-        <MovieCard
-          key={m.id}
-          id={m.id}
-          title={m.title}
-          posterPath={m.poster_path}
-          voteAverage={m.vote_average}
-        />
-    ))}
+		<div>
+			<div className='display-6'><u>POPULAR</u></div>
+			<div className='d-flex flex-row flex-md-wrap gap-3 justify-content-center pt-2'>
+				{movies.map((m) => (
+						<MovieCard
+							key={m.id}
+							id={m.id}
+							title={m.title}
+							posterPath={!m.posterPath ? m.poster_path : m.posterPath}
+							voteAverage={m.voteAverage}
+						/>
+					))}
+			</div>
 		</div>
-		//  <h1>Movie Page!</h1>
 	);
 }

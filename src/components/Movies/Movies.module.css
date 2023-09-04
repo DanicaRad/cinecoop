@@ -1,24 +1,26 @@
-.movieMenu {
-	position: absolute;
-	bottom: 3%;
-	left: 15%;
-	right: 15%;
-	background-color: hsl(0, 0%, 13%, .85);
-	width: fit-content;
-	text-align: center;
-	justify-self: center;
-	margin: auto;
-	z-index: 0;
+.movieCard {
+	width: 9rem;
 }
 
-.movieMenu > a {
+.movieGroup {
+	color: #212121d9;
+	border-bottom: 1px solid #212121d9;
+	text-transform: uppercase;
+}
+
+.movieMenu {
+	background-color: #2b3035;;
+
+}
+
+/* .movieMenu > a {
 	color: #ffffff;
 	padding: .3em;
 }
 
 .movieMenu > a:hover {
 	color: #d0d0d0;
-}
+} */
 
 .watched {
 	color: #48eb12;

@@ -1,26 +1,31 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import CinecoopApi from '@/Api';
 import MovieCard from '@/components/Movies/MovieCard';
-import MovieGroup from '@/components/Movies/MovieGroup';
 
 export default function Page () {
-	const [ movies, setMovies ] = useState(null);
+	const router = useRouter();
+	const [movies, setMovies] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
 
-	useEffect(() => {
-		async function getMovies () {
-			await getMoviesFromApi();
-		}
-		getMovies();
-	}, []);
+	useEffect(
+		() => {
+			if (!router.isReady) return;
+			const { endpoint } = router.query;
+			async function getMovies () {
+				setIsLoading(true);
+				await getMoviesFromApi(endpoint);
+				setIsLoading(false);
+			}
+			getMovies();
+		},
+		[ router.isReady ]
+	);
 
-	async function getMoviesFromApi () {
-		setIsLoading(true);
-		const res = await CinecoopApi.getMovies('now_playing');
-		setMovies(res.data)
+	async function getMoviesFromApi (endpoint) {
+		const res = await CinecoopApi.getMovies(endpoint);
 		// setMovies(mapMovies(res.data));
-
-		setIsLoading(false);
+		setMovies(res.data);
 	}
 
 	function mapMovies (data) {
@@ -33,7 +38,7 @@ export default function Page () {
 
 	return (
 		<div>
-			<div className='display-6'><u>NOW PLAYING</u></div>
+			<div className='display-6 text-uppercase'><u>top rated</u></div>
 			<div className='d-flex flex-row flex-md-wrap gap-3 justify-content-center pt-2'>
 				{movies.map((m) => (
 						<MovieCard

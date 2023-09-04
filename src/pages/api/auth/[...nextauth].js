@@ -43,6 +43,11 @@ export const authOptions = {
 			}
 			return token;
 		}
-	}
+	},
+	pages: {
+    signIn: '/auth/signin'
+		// newUser: '/auth/new-user'
+		// New users will be directed here on first sign in (leave the property out if not of interest)
+  }
 };
 export default NextAuth(authOptions);
