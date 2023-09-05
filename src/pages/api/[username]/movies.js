@@ -6,7 +6,6 @@ import User from '@/models/User';
 
 export default async function handler (req, res) {
 	const { username } = req.query;
-	const session = await getServerSession(req, res, authOptions);
 	if (!session || username !== session.username) {
 		return res.status(403).send({ message: 'unauthorized' });
 	}

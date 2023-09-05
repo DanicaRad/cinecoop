@@ -11,15 +11,14 @@ export default function List () {
 		() => {
 			if (!router.isReady) return;
 			const { id } = router.query;
-			console.log('id', id);
-			async function getList () {
+			async function getList (id) {
         const results = await CinecoopApi.getList(id);
         console.log("results.data", results.data)
 				setList(results.data);
 			}
-			getList();
+			getList(id);
 		},
-		[ router.isReady ]
+		[ router.isReady, id ]
 	);
 
 	if (!list) return <div>Loading</div>;

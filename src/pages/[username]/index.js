@@ -25,42 +25,42 @@ export default function Page () {
 	const { email, exampleCheck1 } = form;
 
 	return (
-		<div>
-			<h1>{username}</h1>
-			<p>You must consolidate users_movies and watchlist into one table!</p>
-			<form onSubmit={handleSubmit}>
-				<div class='mb-3'>
-					<label htmlFor='email' className='form-label'>
-						Email address
-					</label>
-					<input
-						type='email'
-						name='email'
-						className='form-control'
-						id='email'
-						aria-describedby='emailHelp'
-						onChange={handleChange}
-					/>
-					<div id='emailHelp' className='form-text'>
-						We'll never share your email with anyone else.
-					</div>
-				</div>
-				<div class='mb-3 form-check'>
-					<input
-						type='checkbox'
-						name='exampleCheck1'
-						className='form-check-input'
-						id='exampleCheck1'
-						onChange={handleChange}
-					/>
-					<label className='form-check-label' htmlFor='exampleCheck1'>
-						Check me out
-					</label>
-				</div>
-				<button type='submit' className='btn btn-primary'>
-					Submit
-				</button>
-			</form>
-		</div>
-	);
+    <div>
+      <h1>{username}</h1>
+      <p>You must consolidate users_movies and watchlist into one table!</p>
+      <form onSubmit={handleSubmit}>
+        <div class='mb-3'>
+          <label htmlFor='email' className='form-label'>
+            Email address
+          </label>
+          <input
+            type='email'
+            name='email'
+            className='form-control'
+            id='email'
+            aria-describedby='emailHelp'
+            onChange={handleChange}
+          />
+          <div id='emailHelp' className='form-text'>
+            We&#39ll never share your email with anyone else.
+          </div>
+        </div>
+        <div class='mb-3 form-check'>
+          <input
+            type='checkbox'
+            name='exampleCheck1'
+            className='form-check-input'
+            id='exampleCheck1'
+            onChange={handleChange}
+          />
+          <label className='form-check-label' htmlFor='exampleCheck1'>
+            Check me out
+          </label>
+        </div>
+        <button type='submit' className='btn btn-primary'>
+          Submit
+        </button>
+      </form>
+    </div>
+  );
 }

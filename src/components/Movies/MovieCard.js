@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import MovieButtons from '../buttons/MovieButtons';
 import styles from './Movies.module.css'
@@ -14,14 +15,10 @@ export default function MovieCard ({ id, title, posterPath, voteAverage }) {
 		};
 	}
 
-	// function loggedOutButtonsView () {
-	// 	return <MoreOptions isClicked={false} />;
-	// }
-
 	return (
 		<div key={id} className='card position-relative'>
 			<Link href={`/movie/${id}`}>
-				<img className={styles.movieCard} src={imageBaseUrl + posterPath} alt={title + ' movie poster'} />
+				<Image className={styles.movieCard} src={imageBaseUrl + posterPath} alt={title + ' movie poster'} />
 			</Link>
 			{loggedInButtonsView()}
 		</div>

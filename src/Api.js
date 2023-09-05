@@ -138,4 +138,9 @@ export default class CinecoopApi {
 		const res = await this.request(`movie/${id}`);
 		return await res.json();
 	}
+
+	static async coffee() {
+		const res = await this.request(`getcoffee`, 'get');
+		return await res.json();
+	}
 }

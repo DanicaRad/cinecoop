@@ -15,7 +15,6 @@ export default function Layout ({ children }) {
 		() => {
 			async function getCurrUser() {
 				if (session) {
-					console.log("getCurrUser in layout useEffect")
 					const movies = await CinecoopApi.getUserMovies(session.username);
 					const lists = await CinecoopApi.getUsersListsOnInitialLoad(session.username);
 					setUserMovies(movies);

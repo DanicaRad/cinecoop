@@ -15,6 +15,8 @@ export default function Page () {
 			setNowPlaying(await getMoviesFromApi('now_playing'));
 			setPopular(await getMoviesFromApi('popular'));
 			setTopRated(await getMoviesFromApi('top_rated'));
+			const res = await CinecoopApi.coffee();
+			console.log(res);
 
 			setIsLoading(false);
 		}

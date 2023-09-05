@@ -1,18 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import { Modal, Form, FormCheck } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import UserContext from '../Auth/UserContext';
 import MovieButtons from '../buttons/MovieButtons';
 
 export default function MovieMenu ({ id, title }) {
 	const { data: session } = useSession();
-	const { userMovies, setUserMovies, userLists, setUserLists } = useContext(UserContext);
+	const {  userLists, setUserLists } = useContext(UserContext);
 	const [ show, setShow ] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	// --bs-tertiary-bg
 
 	if (!session) {
 		return (
@@ -41,7 +40,7 @@ export default function MovieMenu ({ id, title }) {
 			</button>
 			<Modal show={show} onHide={handleClose} centered>
 				<Modal.Header closeButton>
-					<Modal.Title>Add '{title}' to lists</Modal.Title>
+					<Modal.Title>Add <i>{title}</i>to lists</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Form className='d-grid'>

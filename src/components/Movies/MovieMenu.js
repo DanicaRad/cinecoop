@@ -8,10 +8,9 @@ import CinecoopApi from '@/Api';
 
 export default function MovieMenu ({ id, title }) {
 	const { data: session } = useSession();
-	const { userMovies, setUserMovies, userLists, setUserLists } = useContext(UserContext);
+	const { userLists, setUserLists } = useContext(UserContext);
 	const [ dataToUpdate, setDataToUpdate ] = useState();
 	const [ show, setShow ] = useState(false);
-	const [ resolvedP, setResolvedP ] = useState([]);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -24,10 +23,15 @@ export default function MovieMenu ({ id, title }) {
     evt.preventDefault();
     const res = await CinecoopApi.addToList(session.username, dataToUpdate.listId, { movieId: id, action: "add" });
     console.log("res.data", res.data);
-    
 	}
 
-	// --bs-tertiary-bg
+	function isPrivate(list) {
+		if (list.isPrivate) {
+			return (list.name + " " + <i className='bi bi-lock-fill' />);
+		}
+		return list.name;
+	}
+
 
 	if (!session) {
 		return (
@@ -58,13 +62,12 @@ export default function MovieMenu ({ id, title }) {
 			<button
 				type='button'
 				className='list-group-item list-group-item-action text-center text-bg-dark'
-				onClick={handleShow}
-			>
+				onClick={handleShow}>
 				Add To List
 			</button>
 			<Modal show={show} onHide={handleClose} centered>
 				<Modal.Header closeButton>
-					<Modal.Title>Add '{title}' to lists</Modal.Title>
+					<Modal.Title>Add <i>{title}</i> to lists</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Form onSubmit={handleSubmit} className='d-grid gap-1'>
@@ -84,7 +87,7 @@ export default function MovieMenu ({ id, title }) {
 									disabled={l.movies[id]}
 								/>
 								<label className='btn' htmlFor={l.id}>
-									{l.name} {l.isPrivate && <i className='bi bi-lock-fill' />}
+									{isPrivate(l)}
 								</label>
 							</div>
 						))}

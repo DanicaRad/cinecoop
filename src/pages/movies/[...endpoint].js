@@ -19,7 +19,7 @@ export default function Page () {
 			}
 			getMovies();
 		},
-		[ router.isReady ]
+		[ router.isReady, endpoint ]
 	);
 
 	async function getMoviesFromApi (endpoint) {

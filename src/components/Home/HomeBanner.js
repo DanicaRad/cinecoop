@@ -1,11 +1,7 @@
-import styles from './Home.module.css'
 import { useSession } from 'next-auth/react';
 
 export default function HomeBanner() {
   const { data: session } = useSession();
-  //  <div className={styles.overlay}>
-  //       <img className='img-fluid z-0 w-150' src='/home-background.jpg'></img>
-  //   </div>
 
   if (session) {
     return (
@@ -15,8 +11,7 @@ export default function HomeBanner() {
         </div>
         <div className='text-center text-body-tertiary pt-3 fw-lighter'>
           <small>
-            Cinecoop is demo app inspired by the design and functionality of{" "}
-            <a href='https://letterboxd.com/'>Letterboxd</a>
+            Cinecoop is demo app inspired by the design and functionality of <a href='https://letterboxd.com/'>Letterboxd</a>
           </small>
         </div>
       </div>
@@ -33,7 +28,7 @@ export default function HomeBanner() {
         A social network for film lovers.
       </div>
       <div className='lead fw-lighter text-center'>
-        Track films you've watched, save ones you want to see.
+        Track films you&#39ve watched, save ones you want to see.
       </div>
       <div className='lead fw-lighter text-center'>
         Share with your friends, discover from strangers.

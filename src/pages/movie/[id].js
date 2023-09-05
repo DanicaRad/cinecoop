@@ -3,18 +3,6 @@ import { useRouter } from 'next/router';
 import CinecoopApi from '@/Api';
 import MovieDetail from '@/components/Movies/MoviePage';
 
-export async function GetStaticProps () {
-	console.log('GetStaticProps in Movie/[id]');
-	const res = await CinecoopApi.getImageConfiguratrions();
-	console.log('res.images', res.images);
-	return {
-		props: {
-			imageBaseUrl: res.images.base_url,
-			secureImageBaseUrl: res.images.secure_base_url
-		}
-	};
-}
-
 export default function Page () {
 	const router = useRouter();
 	const [ movie, setMovie ] = useState(null);
@@ -32,7 +20,7 @@ export default function Page () {
 			}
 			getMovies();
 		},
-		[ router.isReady ]
+		[ router.isReady, id ]
 	);
 
 	function getDirector() {

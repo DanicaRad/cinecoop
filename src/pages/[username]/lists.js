@@ -24,7 +24,7 @@ export default function Lists () {
 			}
 			getLists();
 		},
-		[ router.isReady ]
+		[ router.isReady, session, username ]
 	);
 
 	if (!lists) return <div>loading</div>;
