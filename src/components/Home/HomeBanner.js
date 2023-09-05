@@ -35,8 +35,7 @@ export default function HomeBanner() {
       </div>
       <div className='text-center text-body-tertiary pt-3 fw-lighter'>
         <small>
-          A demo app inspired by the design and functionality of{" "}
-          <a href='https://letterboxd.com/'>Letterboxd</a>
+          A demo app inspired by the design and functionality of <a href='https://letterboxd.com/'>Letterboxd</a>
         </small>
       </div>
     </div>

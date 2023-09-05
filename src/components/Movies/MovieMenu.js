@@ -48,57 +48,66 @@ export default function MovieMenu ({ id, title }) {
 	if (!userLists) return <div>Loading</div>;
 
 	return (
-		<ListGroup className={styles.movieMenu}>
-			<button type='button' className='list-group-item list-group-item-action text-center text-bg-dark'>
-				<MovieButtons id={id} component={'moviePage'} />
-			</button>
-			<button
-				type='button'
-				className='list-group-item list-group-item-action text-center text-bg-dark'
-				onClick={signIn}
-			>
-				Sign Up
-			</button>
-			<button
-				type='button'
-				className='list-group-item list-group-item-action text-center text-bg-dark'
-				onClick={handleShow}>
-				Add To List
-			</button>
-			<Modal show={show} onHide={handleClose} centered>
-				<Modal.Header closeButton>
-					<Modal.Title>Add <i>{title}</i> to lists</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form onSubmit={handleSubmit} className='d-grid gap-1'>
-						<input type='checkbox' className='btn-check' id='btn-check-4' autoComplete='off' />
-						<label className='btn' htmlFor='btn-check-4'>
-							Single toggle <i className='bi bi-lock-fill' />
-						</label>
-						{userLists.map((l) => (
-							<div key={l.id} className='d-grid'>
-								<input
-									type='checkbox'
-									className='btn-check'
-									id={l.id}
-									autoComplete='off'
-									onChange={handleChange}
-									checked={l.movies[id]}
-									disabled={l.movies[id]}
-								/>
-								<label className='btn' htmlFor={l.id}>
-									{isPrivate(l)}
-								</label>
-							</div>
-						))}
-					</Form>
-				</Modal.Body>
-				<Modal.Footer>
-					<button className='btn btn-success btn-sm' onClick={handleClose}>
-						Add
-					</button>
-				</Modal.Footer>
-			</Modal>
-		</ListGroup>
-	);
+    <ListGroup className={styles.movieMenu}>
+      <button
+        type='button'
+        className='list-group-item list-group-item-action text-center text-bg-dark'
+      >
+        <MovieButtons id={id} component={"moviePage"} />
+      </button>
+      <button
+        type='button'
+        className='list-group-item list-group-item-action text-center text-bg-dark'
+        onClick={signIn}
+      >
+        Sign Up
+      </button>
+      <button
+        type='button'
+        className='list-group-item list-group-item-action text-center text-bg-dark'
+        onClick={handleShow}
+      >
+        Add To List
+      </button>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Add &#39;{title}&#39; to lists</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit} className='d-grid gap-1'>
+            <input
+              type='checkbox'
+              className='btn-check'
+              id='btn-check-4'
+              autoComplete='off'
+            />
+            <label className='btn' htmlFor='btn-check-4'>
+              Single toggle <i className='bi bi-lock-fill' />
+            </label>
+            {userLists.map((l) => (
+              <div key={l.id} className='d-grid'>
+                <input
+                  type='checkbox'
+                  className='btn-check'
+                  id={l.id}
+                  autoComplete='off'
+                  onChange={handleChange}
+                  checked={l.movies[id]}
+                  disabled={l.movies[id]}
+                />
+                <label className='btn' htmlFor={l.id}>
+                  {isPrivate(l)}
+                </label>
+              </div>
+            ))}
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className='btn btn-success btn-sm' onClick={handleClose}>
+            Add
+          </button>
+        </Modal.Footer>
+      </Modal>
+    </ListGroup>
+  );
 }
