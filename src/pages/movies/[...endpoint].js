@@ -24,7 +24,6 @@ export default function Page () {
 
 	async function getMoviesFromApi (endpoint) {
 		const res = await CinecoopApi.getMovies(endpoint);
-		// setMovies(mapMovies(res.data));
 		setMovies(res.data);
 	}
 

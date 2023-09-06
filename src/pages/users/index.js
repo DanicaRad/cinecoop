@@ -2,6 +2,6 @@ import React from "react";
 
 export default function Page() {
   return (
-    <div>Search page to go here</div>
+    <div>Users page will go here</div>
   )
 }

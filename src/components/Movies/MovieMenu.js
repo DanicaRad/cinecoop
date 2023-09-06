@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import { Modal, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Modal, Form, ListGroup } from 'react-bootstrap';
 import UserContext from '../Auth/UserContext';
 import MovieButtons from '../buttons/MovieButtons';
 import styles from './Movies.module.css';

@@ -1,5 +1,5 @@
 import Navigation from './Navigation/Navigation';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import UserContext from './Auth/UserContext';
 import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';

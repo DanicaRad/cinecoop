@@ -34,7 +34,7 @@ export default function Page() {
 	async function handleSubmit (evt) {
 		evt.preventDefault();
 		const res = await CinecoopApi.register(form);
-		router.push({pathname: '/auth/signin', query: {newUser: res.data.username}})
+		router.replace({pathname: '/auth/signin', query: {newUser: res.data.username}})
 	}
 
 	async function createList (evt) {

@@ -23,7 +23,7 @@ export default function ListCard({ list }) {
       )}
       <div className='pt-2'>
         <Link
-          className='text-dark-emphasis lead'
+          className='text-dark-emphasis lead, fs-7'
           href={`/${list.username}/list/${list.id}`}
         >
           {list.name}

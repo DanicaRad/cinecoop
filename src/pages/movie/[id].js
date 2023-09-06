@@ -20,7 +20,7 @@ export default function Page () {
 			}
 			getMovies();
 		},
-		[ router.isReady, id ]
+		[ router.isReady ]
 	);
 
 	function getDirector() {

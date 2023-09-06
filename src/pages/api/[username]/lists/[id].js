@@ -5,7 +5,6 @@ import List from '@/models/List';
 export default async function handler (req, res) {
 	const { username, id } = req.query;
 	const session = await getServerSession(req, res, authOptions);
-	console.log("session", session);
 	if (req.method === 'GET') return getHandler();
 	if (!session || session.username !== username) {
 		return res.status(403).send({ message: "unathorized" });

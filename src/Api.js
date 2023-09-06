@@ -91,27 +91,27 @@ export default class CinecoopApi {
 		return await res.json();
 	}
 
-	static async markAsWatched (username, data) {
-		const res = await this.request(`/${username}/movies`, 'post', data);
-		return await res.json();
-	}
-
-	static async getWatchlist (username) {
-		const res = await this.request(`/${username}/movies`, 'get');
-		return await res.json();
-	}
-
 	static async getUserMovies (username) {
-		const movies = await CinecoopApi.getWatchlist(username);
-		const usersMovies = {};
-		for (let m of movies.data) {
-			usersMovies[m.movieId] = {};
-			usersMovies[m.movieId].favorite = m.isFavorite ? true : false;
-			usersMovies[m.movieId].watched = m.watchedOn ? m.watchedOn : false;
-			usersMovies[m.movieId].rating = m.rating;
-			usersMovies[m.movieId].watchlist = m.watchlist;
+		const res = await this.request(`/${username}/movies`, "get");
+		const movies = await res.json();
+		return CinecoopApi.formatUsersMovies(movies.data);
+	}
+
+	static async getUsersFavorites(username) {
+		const res = await this.request(`${username}/favorites`, 'get');
+		return await res.json();
+	}
+
+	static formatUsersMovies(data) {
+		const movies = {};
+		for (let d of data) {
+			movies[d.movieId] = {};
+			movies[d.movieId].favorite = d.isFavorite ? true : false;
+			movies[d.movieId].watched = d.watchedOn ? d.watchedOn : false;
+			movies[d.movieId].rating = d.rating;
+			movies[d.movieId].watchlist = d.watchlist;
 		}
-		return usersMovies;
+		return movies;
 	}
 
 	static async addToUsersMovies(username, data) {

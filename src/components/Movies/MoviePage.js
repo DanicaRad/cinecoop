@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import MovieMenu from './MovieMenu';
 import MovieCast from './MovieCast';
@@ -8,12 +7,12 @@ export default function MovieDetail ({ movie, posterUrl, backdropUrl, director }
 	const releaseDate = new Date(movie.release_date + 'T00:00:00');
 	return (
 		<div className='card m-auto'>
-			<Image src={backdropUrl} alt={`${movie.title} backdrop photo`} />
+			<img src={backdropUrl} alt={`${movie.title} backdrop photo`} />
 			<div className='card-body'>
 				<div className='card mb-3 border-0 bg-transparent'>
 					<div className='row g-0'>
 						<div className='col-sm-3 col-auto'>
-							<Image src={posterUrl} className='img-fluid' alt={`${movie.title} poster`} />
+							<img src={posterUrl} className='img-fluid' alt={`${movie.title} poster`} />
 						</div>
 						<div className='col-sm-auto col-md-9'>
 							<div className='card-body'>
