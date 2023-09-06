@@ -15,7 +15,7 @@ export default function MovieGroup ({ endpoint, movies }) {
             id={m.id}
             title={m.title}
             posterPath={!m.posterPath ? m.poster_path : m.posterPath}
-            voteAverage={m.voteAverage}
+            voteAverage={m.voteAverage ? m.voteAverage : m.vote_average}
             releaseDate={m.release_date}
           />
         ))}

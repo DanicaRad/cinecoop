@@ -1,38 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Cinecoop Movie App
 
-## Getting Started
+[Cinecoop](https://cinecoop.vercel.app/), the social network for movie lovers, lets you track and review films you've watched, save ones you want to watch, share with friends and discover from strangers.
 
-First, run the development server:
+Easily create lists - movies with a common theme? your favorite director? Oscar winners? - and view other users lists for inspiration, which you can save to your favorite lists for quick reference.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+You can save films to your watchlist so you never forget about that movie your bestie said you had to see. When you mark a film as watched it will stay in your collection, you can add a review (or not) but your friends will see it's safe to discuss spoilers with you! Regardless of watch status, add movies to your favorites so you can always find them and flaunt your unqiue taste to other users. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+See what's playing, what's popular and top rated in realtime. Search for movies by title, year with more search and filter features coming soon including searching for users and lists. 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Inspired by [Letterboxd](https://letterboxd.com/) and built using [The Movie Data Base](https://developer.themoviedb.org/docs) free API.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+ project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Technology Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Front-End: HTML5 | CSS3 | JavaScript | React | React Bootstrap | Next.js | JSON Web Token | NexthAuth
+Back-End: Node.js | Next.js | JWT Authentication | NextAuth | Bcrypt | PostgreSQL | RESTful APIs
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Hosted by [Vercel](https://vercel.com)

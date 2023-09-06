@@ -7,10 +7,13 @@ export default function MovieCardWithTitle({
   title,
   posterPath,
   voteAverage,
-  releaseDate
+  releaseDate,
 }) {
-  
   releaseDate = new Date(releaseDate + "T00:00:00");
+  function formatVoteAverage(voteAverage) {
+    if (Number.isInteger(voteAverage)) return voteAverage;
+    return voteAverage.toPrecision(2);
+  }
   console.log("releaseDate", releaseDate);
 
   return (
@@ -21,9 +24,9 @@ export default function MovieCardWithTitle({
         posterPath={posterPath}
         voteAverage={voteAverage}
       />
-      <div className='pt-2'>
+      <div className='pt-1'>
         <Link
-          className='text-dark-emphasis fw-lighter text-decoration-none lh-1'
+          className='small text-dark-emphasis fw-lighter text-decoration-none lh-0'
           href={`movies/${id}`}
         >
           {title}
@@ -32,12 +35,12 @@ export default function MovieCardWithTitle({
       <div className='text-body-tertiary fw-lighter'>
         <Link
           href='#'
-          className='fs-6 text-muted'
+          className='small fw-lighter text-muted text-decoration-none'
         >
           {releaseDate.getFullYear()}
-        </Link>
+        </Link>{" "}
         <small>
-          <i className='bi bi-suit-heart-fill' />
+          {formatVoteAverage(voteAverage)} <i className='bi bi-star-fill' />
         </small>
       </div>
     </div>
