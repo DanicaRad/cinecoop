@@ -8,7 +8,6 @@ export default function Page () {
 
 	useEffect(() => {
 		async function getMovies () {
-			console.log('in useEffect');
 			await getMoviesFromApi();
 		}
 		getMovies();
@@ -17,7 +16,6 @@ export default function Page () {
 	async function getMoviesFromApi () {
 		setIsLoading(true);
 		const res = await CinecoopApi.getMovies('popular');
-    console.log("data", res.data);
 		setMovies(res.data);
 		setIsLoading(false);
 	}
@@ -25,19 +23,22 @@ export default function Page () {
 	if (!movies) return <div>Loading</div>;
 
 	return (
-		<div>
-			<div className='display-6'><u>POPULAR</u></div>
-			<div className='d-flex flex-row flex-md-wrap gap-3 justify-content-center pt-2'>
-				{movies.map((m) => (
-						<MovieCard
-							key={m.id}
-							id={m.id}
-							title={m.title}
-							posterPath={!m.posterPath ? m.poster_path : m.posterPath}
-							voteAverage={m.voteAverage}
-						/>
-					))}
-			</div>
-		</div>
-	);
+    <div>
+      <div className='border-bottom border-2 fw-light text-uppercase'>
+        Popular
+      </div>
+      <div className='d-flex flex-row flex-md-wrap gap-3 justify-content-center pt-2'>
+        {movies.map((m) => (
+          <MovieCard
+            key={m.id}
+            id={m.id}
+            title={m.title}
+            posterPath={!m.posterPath ? m.poster_path : m.posterPath}
+            voteAverage={m.voteAverage}
+            releaseDate={m.release_date}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }

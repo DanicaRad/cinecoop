@@ -15,6 +15,4 @@ if (process.env.NODE_ENV === "production") {
   db = global.db;
 }
 
-db.connect();
-
 module.exports = db;

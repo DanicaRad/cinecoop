@@ -1,4 +1,4 @@
-import MovieCard from '../common/MovieCard';
+import MovieCard from '../Movies/MovieCard';
 import Link from 'next/link';
 
 export default function ListDetail ({ list }) {
@@ -10,7 +10,7 @@ export default function ListDetail ({ list }) {
 			</div>
 			<p>{list.description}</p>
 			{list.movies.length > 0 && (
-				<div className='d-flex'>
+				<div className='d-flex gap-3'>
 					{list.movies
 						.slice(0, 4)
 						.map((m) => (

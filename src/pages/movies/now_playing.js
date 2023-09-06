@@ -32,19 +32,22 @@ export default function Page () {
 	if (!movies) return <div>Loading</div>;
 
 	return (
-		<div>
-			<div className='display-6'><u>NOW PLAYING</u></div>
-			<div className='d-flex flex-row flex-md-wrap gap-3 justify-content-center pt-2'>
-				{movies.map((m) => (
-						<MovieCard
-							key={m.id}
-							id={m.id}
-							title={m.title}
-							posterPath={!m.posterPath ? m.poster_path : m.posterPath}
-							voteAverage={m.voteAverage}
-						/>
-					))}
-			</div>
-		</div>
-	);
+    <div>
+      <div className='border-bottom border-2 fw-light text-uppercase'>
+        Now Playing
+      </div>
+      <div className='d-flex flex-row flex-md-wrap gap-3 justify-content-center pt-2'>
+        {movies.map((m) => (
+          <MovieCard
+            key={m.id}
+            id={m.id}
+            title={m.title}
+            posterPath={!m.posterPath ? m.poster_path : m.posterPath}
+            voteAverage={m.voteAverage}
+            releaseDate={m.release_date}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }

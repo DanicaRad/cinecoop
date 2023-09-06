@@ -13,7 +13,7 @@ const options = {
 };
 
 export default async function handler (req, res) {
-	if (req.query) searchHandler(req, res);
+	if (req.query) return searchHandler(req, res);
 	if (req.method === 'GET') {
 		getHandler(req, res);
 	} else {

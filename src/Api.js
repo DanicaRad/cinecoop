@@ -129,6 +129,10 @@ export default class CinecoopApi {
 		return await res.json();
 	}
 
+	static async getMoviesByYear() {
+		
+	}
+
 	static async searchMovies (query) {
 		const res = await this.request(`movies?title=${query}`, 'get');
 		return await res.json();

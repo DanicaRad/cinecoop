@@ -1,4 +1,3 @@
-import { NavItem } from 'react-bootstrap';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import styles from './Navigation.module.css'
 

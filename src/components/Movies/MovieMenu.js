@@ -58,13 +58,6 @@ export default function MovieMenu ({ id, title }) {
       <button
         type='button'
         className='list-group-item list-group-item-action text-center text-bg-dark'
-        onClick={signIn}
-      >
-        Sign Up
-      </button>
-      <button
-        type='button'
-        className='list-group-item list-group-item-action text-center text-bg-dark'
         onClick={handleShow}
       >
         Add To List
@@ -81,9 +74,6 @@ export default function MovieMenu ({ id, title }) {
               id='btn-check-4'
               autoComplete='off'
             />
-            <label className='btn' htmlFor='btn-check-4'>
-              Single toggle <i className='bi bi-lock-fill' />
-            </label>
             {userLists.map((l) => (
               <div key={l.id} className='d-grid'>
                 <input

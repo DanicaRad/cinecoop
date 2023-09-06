@@ -12,6 +12,7 @@ export default function Movies({movies}) {
           title={m.title}
           posterPath={m.posterPath}
           voteAverage={m.voteAverage}
+          releaseDate={m.release_date}
         />
     ))}
     </>

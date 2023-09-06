@@ -1,33 +1,48 @@
-import React, { useContext, useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
-import { Modal, Form } from 'react-bootstrap';
-import UserContext from '../Auth/UserContext';
-import MovieButtons from '../buttons/MovieButtons';
+import React, { useContext, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { Modal, Form } from "react-bootstrap";
+import UserContext from "../Auth/UserContext";
+import MovieButtons from "../buttons/MovieButtons";
 
-export default function MovieMenu ({ id, title }) {
-	const { data: session } = useSession();
-	const {  userLists, setUserLists } = useContext(UserContext);
-	const [ show, setShow ] = useState(false);
+export default function MovieMenu({ id, title }) {
+  const { data: session } = useSession();
+  const { userLists, setUserLists } = useContext(UserContext);
+  const [show, setShow] = useState(false);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
+  function isPrivate(list) {
+    if (list.isPrivate) {
+      return <i className='bi bi-lock-fill'></i>;
+    } else {
+      return <i className='bi bi-lock-fill invisble'></i>;
+    }
+  }
 
-	if (!session) {
-		return (
-			<div className='list-group'>
-				<button type='button' className='list-group-item list-group-item-action text-center' onClick={signIn}>
-					Sign in to log, rate or review
-				</button>
-				<button type='button' className='list-group-item list-group-item-action text-center' onClick={signIn}>
-					Sign Up
-				</button>
-			</div>
-		);
-	}
-	if (!userLists) return <div>Loading</div>;
+  if (!session) {
+    return (
+      <div className='list-group'>
+        <button
+          type='button'
+          className='list-group-item list-group-item-action text-center'
+          onClick={signIn}
+        >
+          Sign in to log, rate or review
+        </button>
+        <button
+          type='button'
+          className='list-group-item list-group-item-action text-center'
+          onClick={signIn}
+        >
+          Sign Up
+        </button>
+      </div>
+    );
+  }
+  if (!userLists) return <div>Loading</div>;
 
-	return (
+  return (
     <div className='list-group'>
       <button
         type='button'
@@ -74,7 +89,8 @@ export default function MovieMenu ({ id, title }) {
                   id={l.id}
                 />
                 <label className='form-check-label' htmlFor={l.id}>
-                  {l.isPrivate && <i className='bi bi-lock-fill' />} {l.name}
+                  {l.name}
+                  {isPrivate(l)}
                 </label>
               </div>
             ))}

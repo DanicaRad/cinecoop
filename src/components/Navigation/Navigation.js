@@ -1,6 +1,7 @@
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import LoggedInDropDown from './LoggedInDropDown';
+import NavSearch from './NavSearch';
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
@@ -64,18 +65,7 @@ export default function Navigation() {
               Lists
             </Nav.Link>
           </Nav>
-          <form className='d-flex' role='search'>
-            <input
-              className='form-control me-2'
-              type='search'
-              placeholder='Search'
-              aria-label='Search'
-            />
-            <button className='btn btn-outline fw-lighter text-uppercase'
-              type='submit'>
-              <i className='bi bi-search'></i>
-            </button>
-          </form>
+          <NavSearch />
         </Navbar.Collapse>
       </Container>
     </Navbar>
