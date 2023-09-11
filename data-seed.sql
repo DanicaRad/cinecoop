@@ -3,6 +3,7 @@
 
 INSERT INTO users (username, password, first_name, last_name, email, phone, join_at)
   VALUES
+    ('testuser', 'test', 'Test', 'User', 'test@test.com', 1111111111, current_timestamp),
     ('testuser2', 'test', 'Test2', 'User2', 'test2@test.com', 2222222222, current_timestamp),
     ('test3', 'test', 'Test3', 'User3', 'test3@test.com', 3333333333, current_timestamp);
 

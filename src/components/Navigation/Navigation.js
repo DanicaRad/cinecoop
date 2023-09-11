@@ -5,7 +5,8 @@ import NavSearch from './NavSearch';
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
-	const { data: session } = useSession();
+  const { data: session } = useSession();
+  console.log("session in navigation", session);
 
 	function signInSignOutBtn () {
 		if (session) {
@@ -14,9 +15,9 @@ export default function Navigation() {
 		return (
 			<>
 			<Nav.Item className={styles.link}>
-				<button className='nav-link btn btn-sm' onClick={signIn}>
+				<Nav.Link className={styles.link} href='/auth/signin'>
 				SIGN IN
-				</button>
+				</Nav.Link>
 			</Nav.Item>
 			<Nav.Link className={styles.link} href='/join'>
 				CREATE AN ACCOUNT
@@ -26,7 +27,7 @@ export default function Navigation() {
 	}
 
 	return (
-    <Navbar expand='lg' className='bg-body-tertiary'>
+    <Navbar expand='lg' className={styles.nav}>
       <Container>
         <Navbar.Brand className='lead text-uppercase fw-light' href='/'>
           Cinecoop

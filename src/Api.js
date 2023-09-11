@@ -33,6 +33,11 @@ export default class CinecoopApi {
 		return await res.json();
 	}
 
+	static async signIn(data) {
+		const res = await this.request('auth/signIn', 'post', data);
+		return await res.json();
+	}
+
 	static async getUsersLists (username) {
 		const res = await this.request(`${username}/lists`, 'get');
 		return await res.json();

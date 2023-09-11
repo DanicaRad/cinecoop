@@ -1,16 +1,36 @@
 .movieCard {
-	width: 9rem;
+  width: 9rem;
 }
 
 .movieGroup {
-	color: #212121d9;
-	border-bottom: 1px solid #212121d9;
-	text-transform: uppercase;
+  color: #212121d9;
+  border-bottom: 1px solid #212121d9;
+  text-transform: uppercase;
 }
 
 .movieMenu {
-	background-color: #2b3035;;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+	justify-content: center;
+  align-self: stretch;
+  padding: 0 3em;
+  /* background-color: #183717; */
+  background-color: #0b0742;
+  border-radius: 3%;
+}
 
+.link2 {
+  /* color: #9BF777; */
+  /* color: #bac94a; */
+  color: #d3dd18;
+}
+
+.link {
+  /* color: #0C00FF; */
+  /* color: #ff01ff; */
+  /* color: #FE5AFF; */
+  color: #ff8bff;
 }
 
 /* .movieMenu > a {
@@ -23,26 +43,26 @@
 } */
 
 .watched {
-	color: #48eb12;
-	padding: .3em;
+  color: #48eb12;
+  padding: 0.3em;
 }
 
 .watched:hover {
-	color: #7ff159;
+  color: #7ff159;
 }
 
 .watchlist {
-	color: #00a7fa;
+  color: #00a7fa;
 }
 
 .watchlist:hover {
-	color: #33b9fb;
+  color: #33b9fb;
 }
 
 .favorite {
-	color: #ff3b28;
+  color: #ff3b28;
 }
 
 .favorite:hover {
-	color: #ff6253;
+  color: #ff6253;
 }

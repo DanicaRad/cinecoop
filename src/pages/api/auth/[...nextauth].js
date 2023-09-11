@@ -12,9 +12,11 @@ export const authOptions = {
 				username: { label: 'Username', type: 'text', placeholder: 'username' },
 				password: { label: 'Password', type: 'password' }
 			},
-			async authorize (credentials, req) {
+			async authorize(credentials, req) {
+				console.log("credentials in nextauth", credentials);
 				const user = await User.authenticate(credentials);
 				if (user) {
+					console.log("user", user);
 					return user;
 				} else {
 					return null;
@@ -23,7 +25,7 @@ export const authOptions = {
 		})
 	],
 	callbacks: {
-		async session (props) {
+		async session(props) {
 			const session = props.session;
 			session.username = props.token.username;
 			delete session.user;
@@ -42,7 +44,11 @@ export const authOptions = {
 				token.username = props.user.username;
 			}
 			return token;
-		}
+		},
+		async redirect({ url, baseUrl }) {
+			console.log("baseUrl", baseUrl);
+    return baseUrl
+  },
 	},
 	pages: {
     signIn: '/auth/signin'

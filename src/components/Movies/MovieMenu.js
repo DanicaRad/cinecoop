@@ -1,53 +1,68 @@
-import React, { useContext, useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
-import { Modal, Form, ListGroup } from 'react-bootstrap';
-import UserContext from '../Auth/UserContext';
-import MovieButtons from '../buttons/MovieButtons';
-import styles from './Movies.module.css';
-import CinecoopApi from '@/Api';
+import React, { useContext, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { Modal, Form, ListGroup } from "react-bootstrap";
+import UserContext from "../Auth/UserContext";
+import MovieButtons from "../buttons/MovieButtons";
+import styles from "./Movies.module.css";
+import CinecoopApi from "@/Api";
 
-export default function MovieMenu ({ id, title }) {
-	const { data: session } = useSession();
-	const { userLists, setUserLists } = useContext(UserContext);
-	const [ dataToUpdate, setDataToUpdate ] = useState();
-	const [ show, setShow ] = useState(false);
+export default function MovieMenu({ id, title }) {
+  const { data: session } = useSession();
+  const { userLists, setUserLists } = useContext(UserContext);
+  const [dataToUpdate, setDataToUpdate] = useState();
+  const [show, setShow] = useState(false);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   function handleChange(evt) {
-    setDataToUpdate({listId: evt.target.id, movieId: id, action: "add"})
-	}
+    setDataToUpdate({ listId: evt.target.id, movieId: id, action: "add" });
+  }
 
-	async function handleSubmit (evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    const res = await CinecoopApi.addToList(session.username, dataToUpdate.listId, { movieId: id, action: "add" });
+    const res = await CinecoopApi.addToList(
+      session.username,
+      dataToUpdate.listId,
+      { movieId: id, action: "add" }
+    );
     console.log("res.data", res.data);
-	}
+  }
 
-	function isPrivate(list) {
-		if (list.isPrivate) {
-			return (list.name + " " + <i className='bi bi-lock-fill' />);
-		}
-		return list.name;
-	}
+  function isPrivate(list) {
+    if (list.isPrivate) {
+      return list.name + " " + <i className='bi bi-lock-fill' />;
+    }
+    return list.name;
+  }
 
+  if (!session) {
+    return (
+      // <div
+      //   className='btn-group-vertical'
+      //   role='group'
+      //   aria-label='Vertical button group'
+      //   style={{ backgroundColor: "#183717" }}
+      // >
+      //   <button type='button' className='btn text-center' onClick={signIn}>
+      //     Sign in to log, rate or review
+      //   </button>
+      //   <button type='button' className='btn text-center' onClick={signIn}>
+      //     Sign Up
+      //   </button>
+      // </div>
+      <div className={styles.movieMenu}>
+        <a href='/auth/signin' className={styles.link}>
+          <div className='p-2'>Sign In</div>
+        </a>
+        <div className='p-2'>Second item</div>
+        <div className='p-2'>Third item</div>
+      </div>
+    );
+  }
+  if (!userLists) return <div>Loading</div>;
 
-	if (!session) {
-		return (
-			<div className='list-group'>
-				<button type='button' className='list-group-item list-group-item-action text-center' onClick={signIn}>
-					Sign in to log, rate or review
-				</button>
-				<button type='button' className='list-group-item list-group-item-action text-center' onClick={signIn}>
-					Sign Up
-				</button>
-			</div>
-		);
-	}
-	if (!userLists) return <div>Loading</div>;
-
-	return (
+  return (
     <ListGroup className={styles.movieMenu}>
       <button
         type='button'
