@@ -46,7 +46,7 @@ export default class CinecoopApi {
 	/**
 	 * getUsersListsOnInitialLoad: returns all lists for user and formats movies as object for faster indexing in components
 	 * 
-	 * returns {id, name, isPrivate, description, movies: {id: true...}}
+	 * returns [{id, name, isPrivate, description, movies: {id: true...}}]
 	 */
 
 	static async getUsersListsOnInitialLoad(username) {

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import CinecoopApi from '@/Api';
 import ListCard from '@/components/Lists/ListCard';
+import UserListCard from '@/components/Lists/UserListCard';
 import { useSession } from 'next-auth/react';
 
 export default function Lists () {
@@ -15,11 +16,9 @@ export default function Lists () {
 		() => {
 			if (!router.isReady) return;
 			const { username } = router.query;
-			console.log("session", session);
 			setUsername(username);
 			async function getLists () {
 				const results = await CinecoopApi.getUsersLists(username);
-				console.log("list results in lists page", results);
 				setLists(results.data);
 			}
 			getLists();
@@ -37,7 +36,7 @@ export default function Lists () {
       <div className='row row-cols-4'>
         {lists.map((l) => (
           <div className='col' key={l.id}>
-            <ListCard key={l.id} list={l} />
+            <UserListCard key={l.id} list={l} />
           </div>
         ))}
       </div>

@@ -14,7 +14,6 @@ export default function MovieCardWithTitle({
     if (Number.isInteger(voteAverage)) return voteAverage;
     return voteAverage.toPrecision(2);
   }
-  console.log("releaseDate", releaseDate);
 
   return (
     <div className={styles.movieCard}>

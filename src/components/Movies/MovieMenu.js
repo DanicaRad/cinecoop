@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 import { Modal, Form, ListGroup } from "react-bootstrap";
 import UserContext from "../Auth/UserContext";
 import MovieButtons from "../buttons/MovieButtons";
@@ -31,9 +32,9 @@ export default function MovieMenu({ id, title }) {
 
   function isPrivate(list) {
     if (list.isPrivate) {
-      return list.name + " " + <i className='bi bi-lock-fill' />;
+      return  "visible";
     }
-    return list.name;
+    return "invisible";
   }
 
   if (!session) {
@@ -63,26 +64,32 @@ export default function MovieMenu({ id, title }) {
   if (!userLists) return <div>Loading</div>;
 
   return (
-    <ListGroup className={styles.movieMenu}>
-      <button
-        type='button'
-        className='list-group-item list-group-item-action text-center text-bg-dark'
+    <ListGroup>
+      <ListGroup.Item
+        variant='light'
+        className='dark-bg-subtle'
       >
         <MovieButtons id={id} component={"moviePage"} />
-      </button>
-      <button
-        type='button'
-        className='list-group-item list-group-item-action text-center text-bg-dark'
+      </ListGroup.Item>
+      <ListGroup.Item
+        className='text-center'
         onClick={handleShow}
+        variant='light'
+        action
       >
         Add To List
-      </button>
+      </ListGroup.Item>
+      <ListGroup.Item className='text-center' variant='light' action>
+        <Link href={`/${session.username}/list/new/${id}`}>
+          <i className='bi bi-plus-lg' /> New List
+        </Link>
+      </ListGroup.Item>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Add &#39;{title}&#39; to lists</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} className='d-grid gap-1'>
+          <Form onSubmit={handleSubmit} className='d-grid gap-1 text-start'>
             <input
               type='checkbox'
               className='btn-check'
@@ -90,10 +97,10 @@ export default function MovieMenu({ id, title }) {
               autoComplete='off'
             />
             {userLists.map((l) => (
-              <div key={l.id} className='d-grid'>
+              <div key={l.id} className='d-grid justify-self-start'>
                 <input
                   type='checkbox'
-                  className='btn-check'
+                  className='btn-check text-start'
                   id={l.id}
                   autoComplete='off'
                   onChange={handleChange}
@@ -101,11 +108,19 @@ export default function MovieMenu({ id, title }) {
                   disabled={l.movies[id]}
                 />
                 <label className='btn' htmlFor={l.id}>
-                  {isPrivate(l)}
+                  {l.name}{" "}
+                  <span className={isPrivate(l)}>
+                    <i className='bi bi-lock-fill' />
+                  </span>{" "}
                 </label>
               </div>
             ))}
           </Form>
+          <div className='d-grid text-center'>
+            <Link href={`/${session.username}/list/new/${id}`}>
+              <i className='bi bi-plus-lg' />  New List...
+            </Link>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <button className='btn btn-success btn-sm' onClick={handleClose}>

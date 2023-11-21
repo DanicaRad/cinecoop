@@ -6,7 +6,7 @@ import MovieButtons from "../buttons/MovieButtons";
 import styles from "./Movies.module.css";
 const imageBaseUrl = "https://image.tmdb.org/t/p/w185";
 
-export default function MovieCard({ id, title, posterPath, voteAverage, releaseDate}) {
+export default function MovieCard({ id, title, posterPath, voteAverage, releaseDate, listView=false}) {
 	const { data: session } = useSession();
 
   function loggedInButtonsView() {
@@ -14,6 +14,21 @@ export default function MovieCard({ id, title, posterPath, voteAverage, releaseD
       return <MovieButtons id={id} component={"movieCard"} />;
     }
   }
+
+  if (listView)
+    return (
+      <div key={id} className='card position-relative border-0'>
+          <img
+            className={styles.movieCard}
+            src={
+              !posterPath
+                ? "/default_movie_poster.jpg"
+                : imageBaseUrl + posterPath
+            }
+            alt={title + " movie poster"}
+          />
+      </div>
+    );
 
 	return (
     <OverlayTrigger

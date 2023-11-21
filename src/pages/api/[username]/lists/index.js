@@ -26,13 +26,19 @@ export default async function handler(req, res) {
   async function postHandler() {
     if (!session || username !== session.username)
       return res.status(403).send({ message: "unauthorized method" });
-    const { name, description, isPrivate } = req.body;
-    const result = await List.createList(
+		const { name, description, isPrivate, movieId } = req.body;
+		if (movieId) console.log("movieId", movieId);
+    let data = await List.createList(
       username,
       name,
       isPrivate,
       description
-    );
-    return res.send({ result });
+		);
+		console.log("data before movieId", data);
+		if (movieId) {
+			const movie = await List.addToList(data.id, movieId);
+			if (movie) data.movies = movieId;
+		}
+    return res.send({ data });
   }
 }

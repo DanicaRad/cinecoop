@@ -223,7 +223,7 @@ export default class List {
         `INSERT INTO lists (username, name, description, is_private, created_at)
         VALUES ($1, $2, $3, $4, current_timestamp)
         RETURNING
-					id, username, name, description, is_private AS "isPrivate", created_at AS "createdAt"`,
+					id, name, description, is_private AS "isPrivate", created_at AS "createdAt"`,
         [username, name, description, isPrivate]
       );
       return list.rows[0];

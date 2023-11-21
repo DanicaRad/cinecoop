@@ -10,7 +10,8 @@ div.link,
 .nav-item {
   text-transform: uppercase;
   font-weight: light;
-  color: #d3dd18;
+  /* color: #d3dd18; */
+	/* color: white; */
 }
 
 .nav-dropdown {

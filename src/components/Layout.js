@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import UserContext from "./Auth/UserContext";
+import MovieContext from "./Movies/MovieContext";
 import { Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Navigation from "./Navigation/Navigation";
@@ -16,8 +17,10 @@ export default function Layout({ children }) {
     async function getCurrUser() {
       if (session) {
         const movies = await CinecoopApi.getUserMovies(session.username);
-				const lists = await CinecoopApi.getUsersListsOnInitialLoad(session.username);
-				console.log("lists", lists)
+        const lists = await CinecoopApi.getUsersListsOnInitialLoad(
+          session.username
+        );
+        console.log("lists", lists);
         setUserMovies(movies);
         setUserLists(lists);
       }
@@ -33,11 +36,13 @@ export default function Layout({ children }) {
       <UserContext.Provider
         value={{ userMovies, setUserMovies, userLists, setUserLists }}
       >
-        <Navigation />
-        <Container className='mb-5'>
-          <main>{children}</main>
-        </Container>
-        <Footer />
+        <MovieContext.Provider value={{imageBaseUrl: CinecoopApi.imageConfigurations}}>
+          <Navigation />
+          <Container className='mb-5'>
+            <main>{children}</main>
+          </Container>
+          <Footer />
+        </MovieContext.Provider>
       </UserContext.Provider>
     </div>
   );

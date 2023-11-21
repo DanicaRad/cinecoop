@@ -1,7 +1,17 @@
 import MovieCard from "../Movies/MovieCard";
 import Link from "next/link";
 
-export default function ListCard({ list }) {
+export default function UserListCard({ list }) {
+
+  function isPrivate() {
+    if (list.isPrivate)
+      return (
+        <span className='ps-2'>
+          <i className='bi bi-lock-fill'></i>
+        </span>
+      );
+  }
+
   return (
     <div key={list.id}>
       {list.movies.length > 0 && (
@@ -24,22 +34,18 @@ export default function ListCard({ list }) {
       )}
       <div className='pt-2'>
         <Link
-          className='text-dark-emphasis lead fs-7'
+          className='text-dark-emphasis lead fs-7 text-decoration-none'
           href={`/${list.username}/list/${list.id}`}
         >
           {list.name}
         </Link>
+        {isPrivate()}
       </div>
-      <div className='text-body-tertiary fw-lighter '>
-        <Link
-          className='text-body-tertiary fw-lighter pe-2'
-          href={`/${list.username}`}
-        >
-          {list.username}
-        </Link>{" "}
-        <small>
-          <i className='bi bi-suit-heart-fill' /> {list.likes}
-        </small>
+      <div className='text-body-tertiary fw-lighter'>
+        <small className='pe-2'>{list.movies.length} films</small>
+        <Link href={`/${list.username}/list/${list.id}/edit`}>
+          <i className='bi bi-pencil-fill'></i>
+        </Link>
       </div>
     </div>
   );

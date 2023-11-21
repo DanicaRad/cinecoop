@@ -11,6 +11,19 @@
 	z-index: 0;
 }
 
+.userListButtons {
+	position: absolute;
+	bottom: 3%;
+	left: 15%;
+	right: 15%;
+	background-color: hsl(0, 0%, 13%, .85);
+	width: 60%;
+	text-align: center;
+	justify-self: center;
+	margin: auto;
+	z-index: 0;
+}
+
 .movieCard > a, .moviePage > a {
 	padding: .3em;
 }
@@ -36,7 +49,16 @@
 }
 
 .watched {
-	color: #48EB12;
+	/* color: #48EB12; */
+	/* color: #68DE51; */
+	/* color: #8BFF8B; */
+	/* color: #C0FF00; */
+	/* color: #E3FF00; */
+	/* color: #DFFF00; */
+	/* color: #66FF00; */
+	/* color: #80FF00; */
+	color: #00FF40;
+	/* color: #59DD40; */
 	padding: .3em;
 }
 
@@ -45,7 +67,8 @@
 }
 
 .watchlist {
-	color: #00A7FA;
+	/* color: #00A7FA; */
+	color: #15F4EE;
 }
 
 .watchlist:hover {
@@ -53,11 +76,14 @@
 }
 
 .favorite {
-	color: #FF3B28;
+	  /* color: #ff3b28; */
+	/* color: #FF91A4; */
+  color: #ff8bff;
+	/* color: #EE204E; */
 }
 
 .favorite:hover {
-	color: #FF6253;
+	opacity: 85%;
 }
 
 /* #6DEF41 */
